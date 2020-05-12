@@ -1,0 +1,26 @@
+<ion-header class="ion-no-border" [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Encabezados
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-toolbar>
+  <ion-segment scrollable="true" (ionChange)="categoryChanged($event)">
+    <ion-segment-button *ngFor="let categoria of categorias" [value]="categoria.nombre">
+      <ion-label class="ion-text-capitalize">{{categoria.esp}}</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+</ion-toolbar>
+
+<ion-content [fullscreen]="true">
+  
+  <app-noticias [noticias]="noticias"></app-noticias>
+  <ion-infinite-scroll class="customspinner" threshold="25%" position="bottom" (ionInfinite)="loadNewsCategoryInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Cargando...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+
+</ion-content>

@@ -1,0 +1,38 @@
+<ion-header class="ion-no-border" [translucent]="true">
+  <ion-toolbar>
+    <ion-title *ngIf="!showSearchbar && searchString === '' ">Para ti</ion-title>
+    <ion-title *ngIf="searchResults && searchString && !showSearchbar">Busqueda: {{searchString}}</ion-title>
+    <ion-searchbar class="animated fadeInDown fast"
+                   color="dark" *ngIf="showSearchbar" 
+                   showCancelButton="always"
+                   animated
+                   [debounce]="500"
+                   [value]="searchString"
+                   (ionChange)="searchNews($event)"
+                   (ionCancel)="showSearchbar = false " 
+                   placeholder="Buscar"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button  class="ion-margin-end" *ngIf="!showSearchbar" (click)="showSearchbar = true">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  
+  <ion-grid fixed *ngIf="searching">
+    <ion-row>
+      <ion-col class="ion-text-center">
+        <ion-spinner color="primary" name="crescent"></ion-spinner>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <app-noticias *ngIf="searchResults.length > 0" [noticias]="searchResults"></app-noticias>
+
+  <app-noticias *ngIf="!showSearchbar" [noticias]="noticias"></app-noticias>
+  <ion-infinite-scroll class="customspinner" threshold="25%" position="bottom" (ionInfinite)="loadNewsInfinite($event)">
+    <ion-infinite-scroll-content loadingSpinner="crescent" loadingText="Cargando...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+</ion-content>
