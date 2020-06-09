@@ -10,7 +10,8 @@
 
 ### Uso
 Para hacerlo funcionar hay que ir a la carpeta src/app/environments/ y renombrar el archivo **environment.dist.ts** por **environment.ts** y crear una copia del mismo llamado **environment.prod.ts**.
-Dentro de los dos archivos hay que colocar tu API KEY de News API en la línea:  `apiKeyNews: 'YOUR_API_KEY',`
+Dentro de los dos archivos hay que colocar tu API KEY de News API en la línea:  `apiKeyNews: 'YOUR_API_KEY',`. 
+Debido a un problema con el CORS ahora es necesario agregar un proxy, solo hay que colocar la URL en la linea `proxyUrl: 'YOUR_PROXY_URL'`, puede ser la API de Heroku (https://cors-anywhere.herokuapp.com/).
 
 ### News API
 - Documentación: https://newsapi.org/
