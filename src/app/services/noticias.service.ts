@@ -5,8 +5,14 @@ import { environment } from '../../environments/environment';
 
 const apiKey = environment.apiKeyNews;
 const apiUrl = environment.apiUrlNews;
+const proxyUrl = environment.proxyUrl;
+
+// const headers= new HttpHeaders()
+//   .set('x-api-key', apiKey)
+//   .set('Access-Control-Allow-Origin', 'http://localhost:8100');
+
 const headers = new HttpHeaders({
-  'X-Api-key': apiKey
+  'x-api-key': apiKey
 });
 
 @Injectable({
@@ -26,7 +32,7 @@ export class NoticiasService {
   // Genericos 
 
   private executeQuery<T>(query: string) {
-    query = apiUrl + query;
+    query = proxyUrl + apiUrl + query;
     return this.http.get<T>(query, { headers });
   }
 
